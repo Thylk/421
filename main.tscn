@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://bcpvfn6ishogn"]
+
+[ext_resource type="PackedScene" uid="uid://uq1b2sn77kdw" path="res://die.tscn" id="1_ylmcx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fngvj"]
+size = Vector3(50, 10, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rps8o"]
+size = Vector3(50, 10, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oewjq"]
+size = Vector3(2, 10, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_khqvq"]
+size = Vector3(2, 10, 50)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x83oq"]
+size = Vector3(2, 10, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7cb87"]
+size = Vector3(2, 10, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61d36"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0dak"]
+albedo_color = Color(0, 0.317647, 0.172549, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nudi6"]
+material = SubResource("StandardMaterial3D_r0dak")
+size = Vector3(50, 1, 50)
+
+[node name="Main" type="Node3D"]
+
+[node name="Wall" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 24)
+shape = SubResource("BoxShape3D_fngvj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 24)
+mesh = SubResource("BoxMesh_rps8o")
+
+[node name="Wall2" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -24)
+shape = SubResource("BoxShape3D_fngvj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -24)
+mesh = SubResource("BoxMesh_rps8o")
+
+[node name="Wall3" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, 0)
+mesh = SubResource("BoxMesh_oewjq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 4, 0)
+shape = SubResource("BoxShape3D_khqvq")
+
+[node name="Wall4" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 4, 0)
+mesh = SubResource("BoxMesh_x83oq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 4, 0)
+shape = SubResource("BoxShape3D_7cb87")
+
+[node name="Board" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Board"]
+shape = SubResource("BoxShape3D_61d36")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Board"]
+mesh = SubResource("BoxMesh_nudi6")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.0110652, 0.999939, 0, -0.999939, -0.0110652, 0, 26.7496, 0)
+light_energy = 50.0
+shadow_enabled = true
+spot_range = 36.934
+
+[node name="Camera Pivot" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.6392, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Camera Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.50222, 0.86474, 0, -0.86474, 0.50222, 0, -8.22389, 20.5483)
+
+[node name="Die" parent="." instance=ExtResource("1_ylmcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.709, 0)
+
+[node name="Die2" parent="." instance=ExtResource("1_ylmcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9397, 7.8569, 0)
+
+[node name="Die3" parent="." instance=ExtResource("1_ylmcx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29715, 7.51559, 0)

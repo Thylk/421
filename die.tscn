@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://uq1b2sn77kdw"]
+
+[ext_resource type="Script" path="res://die.gd" id="1_rip3g"]
+[ext_resource type="PackedScene" uid="uid://bkbcdgcvl8pd" path="res://die.glb" id="2_omaln"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8w06g"]
+size = Vector3(2, 2, 2)
+
+[node name="Die" type="RigidBody3D"]
+gravity_scale = 2.0
+freeze = true
+script = ExtResource("1_rip3g")
+
+[node name="die" parent="." instance=ExtResource("2_omaln")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8w06g")
+
+[node name="1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="4" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="5" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="6" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
