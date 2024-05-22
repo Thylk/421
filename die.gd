@@ -3,6 +3,7 @@ extends RigidBody3D
 var start_pos
 var roll_strength = 30
 var markers = []
+var is_rollable = true
 
 signal roll_finished(value)
 
@@ -15,7 +16,10 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		_roll()
+		if is_rollable:
+			_roll()
+	if event.is_action_pressed("ui_cancel"):
+			reset()
 
 func _roll():
 	#Reset state
@@ -54,6 +58,17 @@ func _integrate_forces(state):
 		var upward_value = get_upward_facing_value()
 		emit_signal("roll_finished", get_instance_id(), upward_value)
 		sleeping = true  # Put the die to sleep to stop processing forces
+		if (upward_value != 6):
+			is_rollable = false
+
+func reset():
+	is_rollable = true  # Allow the die to be rolled again
+	sleeping = true  # Put the die to sleep to stop processing forces
+	freeze = true
+	global_transform = Transform3D(global_transform.basis, start_pos)  # Reset position
+	global_transform = Transform3D(Basis(), start_pos)  # Reset position and orientation
+	linear_velocity = Vector3.ZERO  # Reset linear velocity
+	angular_velocity = Vector3.ZERO  # Reset angular velocity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

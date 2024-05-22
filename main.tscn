@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bcpvfn6ishogn"]
+[gd_scene load_steps=14 format=3 uid="uid://bcpvfn6ishogn"]
 
 [ext_resource type="Script" path="res://GameController.gd" id="1_qpkjt"]
 [ext_resource type="PackedScene" uid="uid://uq1b2sn77kdw" path="res://die.tscn" id="1_ylmcx"]
+[ext_resource type="Script" path="res://ScoreLabel.gd" id="3_mfb5w"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fngvj"]
 size = Vector3(50, 10, 2)
@@ -30,6 +31,9 @@ albedo_color = Color(0, 0.317647, 0.172549, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_nudi6"]
 material = SubResource("StandardMaterial3D_r0dak")
 size = Vector3(50, 1, 50)
+
+[sub_resource type="Theme" id="Theme_61xgq"]
+default_font_size = 22
 
 [node name="Main" type="Node3D"]
 
@@ -86,16 +90,16 @@ shape = SubResource("BoxShape3D_61d36")
 mesh = SubResource("BoxMesh_nudi6")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0110652, 0.999939, 0, -0.999939, -0.0110652, 0, 26.7496, 0)
-light_energy = 50.0
+transform = Transform3D(1, 0, 0, 0, -0.0110652, 0.999939, 0, -0.999939, -0.0110652, 0, 56.0763, 0)
+light_energy = 100.0
 shadow_enabled = true
-spot_range = 36.934
+spot_range = 404.9
 
 [node name="Camera Pivot" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 43.6392, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Camera Pivot"]
-transform = Transform3D(1, 0, 0, 0, 0.50222, 0.86474, 0, -0.86474, 0.50222, 0, -8.22389, 20.5483)
+transform = Transform3D(1, 0, 0, 0, 0.455871, 0.890046, 0, -0.890046, 0.455871, 0, -8.22389, 20.7805)
 
 [node name="Die" parent="." groups=["dice"] instance=ExtResource("1_ylmcx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.3269, 0)
@@ -105,3 +109,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9397, 13.1105, 0)
 
 [node name="Die3" parent="." groups=["dice"] instance=ExtResource("1_ylmcx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29715, 13.5591, 0)
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_61xgq")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 37.0
+offset_top = 30.0
+offset_right = 98.0
+offset_bottom = 53.0
+text = "Score: 0"
+script = ExtResource("3_mfb5w")

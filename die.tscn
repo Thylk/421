@@ -7,7 +7,7 @@
 size = Vector3(2, 2, 2)
 
 [node name="Die" type="RigidBody3D"]
-gravity_scale = 2.0
+gravity_scale = 3.0
 freeze = true
 script = ExtResource("1_rip3g")
 
