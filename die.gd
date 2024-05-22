@@ -14,12 +14,14 @@ func _ready():
 	for i in range(1,7):
 		markers.append(get_node(str(i)))
 
+
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
 		if is_rollable:
 			_roll()
 	if event.is_action_pressed("ui_cancel"):
 			reset()
+
 
 func _roll():
 	#Reset state
@@ -37,7 +39,18 @@ func _roll():
 	var throw_vector = Vector3(randf_range(-1, 1), 0, randf_range(-1, 1)).normalized()
 	angular_velocity = throw_vector * roll_strength / 2
 	apply_central_impulse(throw_vector * roll_strength)
-	
+
+
+func reset():
+	is_rollable = true  # Allow the die to be rolled again
+	sleeping = true  # Put the die to sleep to stop processing forces
+	freeze = true
+	global_transform = Transform3D(global_transform.basis, start_pos)  # Reset position
+	global_transform = Transform3D(Basis(), start_pos)  # Reset position and orientation
+	linear_velocity = Vector3.ZERO  # Reset linear velocity
+	angular_velocity = Vector3.ZERO  # Reset angular velocity
+
+
 func get_upward_facing_value():
 	var highest_marker_index = -1
 	var highest_y = -INF  # Start with negative infinity
@@ -50,25 +63,18 @@ func get_upward_facing_value():
 
 	# Assuming marker names correlate with face values directly
 	return highest_marker_index + 1
-	
+
+
 func _integrate_forces(state):
 	# Check if the die has come to rest
 	if linear_velocity.length() < 0.01 and angular_velocity.length() < 0.01:
 		# Die is considered resting, get the upward facing value
 		var upward_value = get_upward_facing_value()
-		emit_signal("roll_finished", get_instance_id(), upward_value)
 		sleeping = true  # Put the die to sleep to stop processing forces
+		emit_signal("roll_finished", get_instance_id(), upward_value)
 		if (upward_value != 6):
 			is_rollable = false
 
-func reset():
-	is_rollable = true  # Allow the die to be rolled again
-	sleeping = true  # Put the die to sleep to stop processing forces
-	freeze = true
-	global_transform = Transform3D(global_transform.basis, start_pos)  # Reset position
-	global_transform = Transform3D(Basis(), start_pos)  # Reset position and orientation
-	linear_velocity = Vector3.ZERO  # Reset linear velocity
-	angular_velocity = Vector3.ZERO  # Reset angular velocity
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

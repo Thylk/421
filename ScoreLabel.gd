@@ -13,4 +13,4 @@ func _process(delta):
 func _on_score_updated(amount: int):
 	score += amount
 	text = "Score: %d" % score
-	print("Signal received with value of: ", amount)
+	print("Score updated with value of: ", amount)
