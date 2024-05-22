@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" path="res://GameController.gd" id="1_qpkjt"]
 [ext_resource type="PackedScene" uid="uid://uq1b2sn77kdw" path="res://die.tscn" id="1_ylmcx"]
-[ext_resource type="Script" path="res://ScoreLabel.gd" id="3_mfb5w"]
+[ext_resource type="Script" path="res://UserInterface.gd" id="3_ejyd0"]
+
+[sub_resource type="Theme" id="Theme_61xgq"]
+default_font_size = 22
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_fngvj"]
 size = Vector3(50, 10, 2)
@@ -32,13 +35,57 @@ albedo_color = Color(0, 0.317647, 0.172549, 1)
 material = SubResource("StandardMaterial3D_r0dak")
 size = Vector3(50, 1, 50)
 
-[sub_resource type="Theme" id="Theme_61xgq"]
-default_font_size = 22
-
 [node name="Main" type="Node3D"]
 
 [node name="GameController" type="Node3D" parent="."]
 script = ExtResource("1_qpkjt")
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_61xgq")
+script = ExtResource("3_ejyd0")
+
+[node name="LabelPlayer1" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 34.0
+offset_top = 22.0
+offset_right = 120.0
+offset_bottom = 53.0
+text = "Player 1"
+
+[node name="ScoreLabelPlayer1" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 56.0
+offset_right = 118.0
+offset_bottom = 87.0
+text = "Score: 0"
+
+[node name="LabelPlayer2" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 28.0
+offset_right = 1114.0
+offset_bottom = 59.0
+text = "Player 2"
+
+[node name="ScoreLabelPlayer2" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 1028.0
+offset_top = 62.0
+offset_right = 1114.0
+offset_bottom = 93.0
+text = "Score: 0"
+
+[node name="LabelWinner" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 551.0
+offset_top = 297.0
+offset_right = 625.0
+offset_bottom = 328.0
 
 [node name="Wall" type="StaticBody3D" parent="."]
 
@@ -109,20 +156,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9397, 13.1105, 0)
 
 [node name="Die3" parent="." groups=["dice"] instance=ExtResource("1_ylmcx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.29715, 13.5591, 0)
-
-[node name="UserInterface" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme = SubResource("Theme_61xgq")
-
-[node name="ScoreLabel" type="Label" parent="UserInterface"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 37.0
-offset_top = 30.0
-offset_right = 98.0
-offset_bottom = 53.0
-text = "Score: 0"
-script = ExtResource("3_mfb5w")
