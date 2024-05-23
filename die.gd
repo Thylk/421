@@ -14,7 +14,7 @@ func _ready():
 	for i in range(1,7):
 		markers.append(get_node(str(i)))
 
-func _integrate_forces(state):
+func _integrate_forces(_state):
 	# Check if the die has come to rest
 	if linear_velocity.length() < 0.01 and angular_velocity.length() < 0.01:
 		# Die is considered resting, get the upward facing value
